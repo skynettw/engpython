@@ -1,5 +1,8 @@
 教材網址：https://104.es
 PW: python109-1 
+
+https://github.com/skynettw/engpython
+
 方便的話，請安裝 
 Visual Studio Code
 or 
@@ -21,6 +24,21 @@ pip install jupyter
 pip install requests
 pip install bs4
 pip install ipython
+
+SQL語言的說明：
+  查詢score表格中的資料：
+    SELECT * FROM score;
+  新增資料到score資料表：
+    INSERT INTO score 
+           ('name', 'eng', 'chi') 
+           VALUES 
+           ('Richard', 100, 90);
+
+sql_str = "insert into score 
+           ('name', 'eng', 'chi') values('{}',{},{});".format(
+                 name, eng, chi)
+
+
 
 
 
