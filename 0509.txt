@@ -1,0 +1,30 @@
+教材網址：https://104.es
+PW: python109-1 
+方便的話，請安裝 
+Visual Studio Code
+or 
+Sublime Text 3 or 4
+
+
+先在C磁碟機建立一個資料夾叫做
+  EngPython
+然後到AnacondaPrompt輸入以下指令：
+  cd \EngPython  <=切換工作目錄 
+  dir            <=檢查目前的目錄中的內容 
+  pip         <= Python的套件管理程式
+  pip list  <= 列出現有環境中的所有套件
+  以下要建立一個新的虛擬環境：
+conda create --name engpython python=3.10
+conda activate engpython
+
+pip install jupyter 
+pip install requests
+pip install bs4
+pip install ipython
+
+
+
+
+
+
+
