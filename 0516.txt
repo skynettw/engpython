@@ -1,0 +1,7 @@
+https://104.es
+PW: python109-1
+
+cd \                      切換工作目錄到根目錄
+cd \EngPython             切換到EngPython目錄 
+conda env list            檢視所有系統中可以用的Python虛擬環境
+conda activate engpython  進入engpython這個虛擬環境
