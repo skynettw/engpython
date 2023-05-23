@@ -1,17 +1,28 @@
-import requests
+import requests, time
 from bs4 import BeautifulSoup
-import json, time
+import sqlite3
 
-urls = "https://www.nkust.edu.tw/p/403-1000-1363-{}.php"
-
-sel = "#pageptlist > div > div > div > div.d-txt > div.mtitle > a"
-for pg in range(1, 2):
-    url = urls.format(pg)
-    html = requests.get(url)
-    soup = BeautifulSoup(html.text, "html.parser")
-    headlines = soup.select(sel)
-    for headline in headlines:  
-        print(headline["title"])
-        print(headline["href"])
-        print("=====================================")
+dbfile = "nkust.db"
+conn = sqlite3.connect(dbfile)
+sql_str = "select url from nkustheadline;"
+rows = conn.execute(sql_str)
+alldata = ""
+count = 0
+for row in rows:
+    count += 1
+    if count > 50: break
+    url = row[0]
+    print(url)
+    try:
+        html = requests.get(url).text
+        soup = BeautifulSoup(html, "html.parser")
+        sel = "#Dyn_2_3 > div.module.module-detail.md_style1 > div > section > div.mcont > div.mpgdetail > p"
+        content = soup.select(sel)
+        data = content[0]
+        alldata += data.text
+    except:
+        pass
     time.sleep(3)
+conn.close()
+with open("alldata.txt", "w", encoding="utf-8") as fp:
+    fp.write(alldata)
