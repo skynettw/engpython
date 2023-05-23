@@ -10,7 +10,7 @@ alldata = ""
 count = 0
 for row in rows:
     count += 1
-    if count > 50: break
+    if count > 20: break
     url = row[0]
     print(url)
     try:
