@@ -1,6 +1,9 @@
-import requests, time
+import requests, time, sqlite3
 from bs4 import BeautifulSoup
-data = list()
+dbfile = "nkust.db"
+conn = sqlite3.connect(dbfile)
+sql_str = "delete from nkustheadline;"   #刪除nkustheadline表格中所有的舊資料
+conn.execute(sql_str);        
 urls = "https://www.nkust.edu.tw/p/403-1000-1363-{}.php?Lang=zh-tw"
 for page in range(1, 54):
     url = urls.format(page)
@@ -10,11 +13,10 @@ for page in range(1, 54):
     soup = BeautifulSoup(html, "html.parser")
     headlines = soup.select(sel)
     for headline in headlines:
-        #print(headline["title"])
-        #print(headline["href"])
-        temp = dict()
-        temp["title"] = headline["title"]
-        temp["href"] = headline["href"]
-        data.append(temp)
+        print(headline["title"])
+        sql_str = "insert into nkustheadline ('title', 'url') values('{}','{}');".format(
+                    headline['title'], headline['href'])
+        conn.execute(sql_str)
+        conn.commit()
     time.sleep(3)
-print(data)
+conn.close()
